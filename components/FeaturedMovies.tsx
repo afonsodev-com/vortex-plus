@@ -29,7 +29,7 @@ const FeaturedMovies: React.FC<FeaturedMoviesProps> = ({ movies }) => {
 
   return (
     <YStack mt="$4">
-      <Card elevate size="$4" width="100%" height={300}>
+      <Card elevate size="$4" width="100%" height={350}>
         <Image
           source={{ uri: movie.poster }}
           width="100%"
@@ -40,10 +40,10 @@ const FeaturedMovies: React.FC<FeaturedMoviesProps> = ({ movies }) => {
           flex={1}
           backgroundColor="rgba(0,0,0,0.4)"
           justifyContent="flex-end"
-          p="$2"
+          p="$3"
         >
-          <H2>{movie.title}</H2>
-          <Paragraph>{movie.description}</Paragraph>
+          {/* <H2>{movie.title}</H2>
+          <Paragraph>{movie.description}</Paragraph> */}
           <XStack gap="$11" justifyContent="center">
             <YStack alignItems="center">
               <Text borderRadius="$10" onPress={() => {}}>
