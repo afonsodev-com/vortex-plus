@@ -30,7 +30,7 @@ const FeaturedMovies: React.FC<FeaturedMoviesProps> = ({ movies }) => {
   const movie = movies[currentMovieIndex];
 
   return (
-    <YStack mt="$2" p="$2" borderRadius={5}>
+    <YStack mt="$1" p="$2" borderRadius={5}>
       <Card elevate size="$4" width="100%" height={410} borderRadius={5} borderColor={'gray'} borderWidth={0.2} overflow='hidden'>
         <Image
           source={{ uri: movie.poster }}

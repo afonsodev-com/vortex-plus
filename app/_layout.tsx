@@ -1,7 +1,6 @@
 // app/_layout.tsx
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
+import { DarkTheme, ThemeProvider } from '@react-navigation/native'
 import { SplashScreen, Stack } from 'expo-router'
-import { useColorScheme } from 'react-native'
 import { TamaguiProvider } from 'tamagui'
 import { getAuth, User, onAuthStateChanged } from 'firebase/auth';
 
@@ -57,11 +56,9 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme()
-
   return (
-    <TamaguiProvider config={config} defaultTheme={colorScheme as any}>
-      <ThemeProvider value={colorScheme === 'dark' ? DefaultTheme : DarkTheme}>
+    <TamaguiProvider config={config} defaultTheme="dark">
+      <ThemeProvider value={DarkTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>

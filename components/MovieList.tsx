@@ -18,7 +18,7 @@ interface MovieListProps {
 const MovieList: React.FC<MovieListProps> = ({ title, movies }) => {
   return (
     <YStack mt="$4" ml="$2">
-      <H5 mb="$2" fontWeight={'$7'}>{title}</H5>
+      <H5 mb="$2" color={'white'} fontWeight={'$7'}>{title}</H5>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <XStack gap="$2">
           {movies.map((movie) => (

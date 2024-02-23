@@ -1,4 +1,4 @@
-import React from 'react';
+// component/Header.tsx
 import { View, Image, TouchableOpacity } from 'react-native'; 
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Avatar } from 'tamagui';

@@ -7,7 +7,7 @@ import { movies } from '../../../data/movies';
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={{flex: 1, marginTop: 60}}>
+    <SafeAreaView style={{flex: 1, marginTop: 40}}>
       <Header />
       <ScrollView showsVerticalScrollIndicator={false}>
         <FeaturedMovie movies={movies} />
