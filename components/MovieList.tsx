@@ -24,7 +24,7 @@ const MovieList: React.FC<MovieListProps> = ({ title, movies }) => {
           {movies.map((movie) => (
             <Link
               key={movie.id}
-              href={{ pathname: 'movie', params: { movie } } as any} // Navega para a tela de detalhes com os parâmetros do filme
+              href={{ pathname: 'movie', params: { movie } } as any}
             >
               <Card
                 key={movie.id}
