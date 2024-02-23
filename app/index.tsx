@@ -1,7 +1,7 @@
 // app/index.tsx
 import React, { useState } from 'react';
 import { loginUser } from './auth';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from 'expo-router';
 import { Button, Input, YStack } from 'tamagui';
 import { Image, View, Alert } from 'react-native';
 
@@ -25,9 +25,9 @@ export default function App() {
   }, [navigation]);
 
   return (
-    <YStack flex={1} justifyContent="center" padding="$3" space="$3">
+    <YStack flex={1} mt="$-15" justifyContent="center" padding="$3" space="$3">
       <YStack width={250} alignSelf="center" space="$3">
-        <View style={{alignItems: 'center', marginBottom: 50}}>
+        <View style={{alignItems: 'center', marginBottom: 40}}>
           <Image
             source={{ uri: 'https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png' }}
             style={{ width: 220, height: 60 }}

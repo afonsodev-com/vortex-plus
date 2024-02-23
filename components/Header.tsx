@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native'; 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Avatar } from 'tamagui';
 
 const Header: React.FC = () => {
@@ -12,7 +12,7 @@ const Header: React.FC = () => {
       />
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <TouchableOpacity style={{ marginHorizontal: 10 }}>
-          <Ionicons name="tv-outline" size={30} color="#fff" />
+          <MaterialIcons name="cast" size={28} color="#fff" />
         </TouchableOpacity>
         <TouchableOpacity style={{ marginHorizontal: 10 }}>
           <Ionicons name="search-outline" size={30} color="#fff" />

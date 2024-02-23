@@ -3,12 +3,13 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { SplashScreen, Stack } from 'expo-router'
 import { useColorScheme } from 'react-native'
 import { TamaguiProvider } from 'tamagui'
+import { getAuth, User, onAuthStateChanged } from 'firebase/auth';
 
 import '../tamagui-web.css'
 
 import { config } from '../tamagui.config'
 import { useFonts } from 'expo-font'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export {
   ErrorBoundary,
@@ -27,15 +28,29 @@ export default function RootLayout() {
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   })
 
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+
+  function handleAuthStateChanged(user: User | null) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
   useEffect(() => {
     if (interLoaded || interError) {
       SplashScreen.hideAsync()
     }
-  }, [interLoaded, interError])
+  
+    const auth = getAuth();
+    const subscriber = onAuthStateChanged(auth, handleAuthStateChanged);
+    return subscriber;
+  }, [interLoaded, interError]);
 
   if (!interLoaded && !interError) {
     return null
   }
+
+  if (initializing) return null;
 
   return <RootLayoutNav />
 }
