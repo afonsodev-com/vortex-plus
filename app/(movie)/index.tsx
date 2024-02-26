@@ -4,7 +4,8 @@ import { Text, View } from 'tamagui';
 import { Video, ResizeMode } from 'expo-av';
 import { useRouter } from 'expo-router';
 import { movies } from '../../data/movies';
-interface Movie {
+
+interface movie {
   id: number;
   title: string;
   poster: string;
@@ -15,18 +16,8 @@ interface Movie {
 const MovieDetails: React.FC = () => {
   const route = useRouter();
   const movieId = route.query?.id;
-
-  if (!movieId) {
-    return <Text>ID do filme inválido</Text>;
-  }
-
   const id = parseInt(movieId, 10);
-
   const movie = movies.find(movie => movie.id === id);
-
-  if (!movie) {
-    return <Text>Filme não encontrado</Text>;
-  }
 
   return (
     <View>
@@ -45,5 +36,3 @@ const MovieDetails: React.FC = () => {
     </View>
   );
 };
-
-export default MovieDetails;

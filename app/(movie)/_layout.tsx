@@ -4,7 +4,6 @@ import { DarkTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { TamaguiProvider } from 'tamagui';
 
-import MovieDetails from './_layout'; // Importe a tela de detalhes do filme
 import '../../tamagui-web.css';
 import { config } from '../../tamagui.config';
 

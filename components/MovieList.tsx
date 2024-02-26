@@ -1,7 +1,7 @@
 // components/MovieList.tsx
 import React from 'react';
-import { Card, H5, Heading, Text, XStack, Image, YStack, ScrollView } from 'tamagui';
-import { useNavigation } from 'expo-router'; // Importe o useNavigation
+import { Card, H5, ScrollView, Image, XStack, YStack } from 'tamagui';
+import { useNavigation } from 'expo-router';
 
 interface Movie {
   id: number;
@@ -17,11 +17,13 @@ interface MovieListProps {
 }
 
 const MovieList: React.FC<MovieListProps> = ({ title, movies }) => {
-  const navigation = useNavigation(); // Use o hook useNavigation
+  const navigation = useNavigation();
 
   return (
     <YStack mt="$4" ml="$2">
-      <H5 mb="$2" color={'white'} fontWeight={'$7'}>{title}</H5>
+      <H5 mb="$2" color="white" fontWeight="$7">
+        {title}
+      </H5>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <XStack gap="$2">
           {movies.map((movie) => (
@@ -32,8 +34,8 @@ const MovieList: React.FC<MovieListProps> = ({ title, movies }) => {
               width={110}
               height={180}
               borderRadius={5}
-              overflow='hidden'
-              onPress={() => navigation.navigate('(movie)', { movieId: movie.id })} // Use o método navigate do objeto navigation
+              overflow="hidden"
+              onPress={() => navigation.navigate('(movie)', { id: movie.id })} // Passar { id: movie.id }
             >
               <Image
                 source={{ uri: movie.poster }}
