@@ -1,9 +1,10 @@
 // app/index.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { loginUser } from './auth';
 import { useNavigation } from 'expo-router';
 import { Button, Input, YStack } from 'tamagui';
 import { Image, View, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
   const [email, setEmail] = useState('');
@@ -15,8 +16,19 @@ export default function App() {
     if (user) {
       Alert.alert("Sucesso", "Login realizado com sucesso!");
       navigation.navigate('(tabs)');
+      await AsyncStorage.setItem('userLoggedIn', 'true');
     }
   };
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const userLoggedIn = await AsyncStorage.getItem('userLoggedIn');
+      if (userLoggedIn === 'true') {
+        navigation.navigate('(tabs)');
+      }
+    };
+    checkLogin();
+  }, []);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
