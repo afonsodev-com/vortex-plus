@@ -36,7 +36,7 @@ const ProfileScreen: React.FC = () => {
       <TouchableOpacity>
         <XStack alignItems="center" justifyContent="center" my="$7">
           <Feather name="edit-2" size={24} color="white" />
-          <Text ml="$2">Gerenciar perfil</Text> // Adicionar a lógica de criar e excluir perfil aqui.
+          <Text ml="$2">Gerenciar perfil</Text>
         </XStack>
       </TouchableOpacity>
       <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4">
