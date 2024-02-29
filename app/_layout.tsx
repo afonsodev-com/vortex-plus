@@ -1,32 +1,28 @@
 // app/_layout.tsx
-import { DarkTheme, ThemeProvider } from '@react-navigation/native'
-import { SplashScreen, Stack } from 'expo-router'
-import { TamaguiProvider } from 'tamagui'
-import { getAuth, User, onAuthStateChanged } from 'firebase/auth';
+import { DarkTheme, ThemeProvider } from "@react-navigation/native";
+import { SplashScreen, Stack } from "expo-router";
+import { TamaguiProvider } from "tamagui";
+import { getAuth, User, onAuthStateChanged } from "firebase/auth";
 
-import '../tamagui-web.css'
+import "../tamagui-web.css";
 
-import { config } from '../tamagui.config'
-import { useFonts } from 'expo-font'
-import { useEffect, useState } from 'react'
+import { config } from "../tamagui.config";
+import { useFonts } from "expo-font";
+import { useEffect, useState } from "react";
 
-export {
-  ErrorBoundary,
-} from 'expo-router'
+export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
-  initialRouteName: '(tabs)',
-  
-}
+  initialRouteName: "(tabs)",
+};
 
-SplashScreen.preventAutoHideAsync()
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  
   const [interLoaded, interError] = useFonts({
-    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
-    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
-  })
+    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
+  });
 
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState<User | null>(null);
@@ -38,21 +34,21 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (interLoaded || interError) {
-      SplashScreen.hideAsync()
+      SplashScreen.hideAsync();
     }
-  
+
     const auth = getAuth();
     const subscriber = onAuthStateChanged(auth, handleAuthStateChanged);
     return subscriber;
   }, [interLoaded, interError]);
 
   if (!interLoaded && !interError) {
-    return null
+    return null;
   }
 
   if (initializing) return null;
 
-  return <RootLayoutNav />
+  return <RootLayoutNav />;
 }
 
 function RootLayoutNav() {
@@ -61,10 +57,10 @@ function RootLayoutNav() {
       <ThemeProvider value={DarkTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(movie)" options={{ headerShown: false }} />
-          <Stack.Screen name="(profile)" options={{ presentation: 'modal', headerTitle: 'Profile' }} />
+          <Stack.Screen name="(movie)/[id]"/>
+          <Stack.Screen name="(profile)" options={{ headerTitle: "Profile" }} />
         </Stack>
       </ThemeProvider>
     </TamaguiProvider>
-  )
+  );
 }
