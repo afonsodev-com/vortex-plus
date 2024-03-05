@@ -57,7 +57,7 @@ function RootLayoutNav() {
       <ThemeProvider value={DarkTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(movie)/[id]"/>
+          <Stack.Screen name="(movie)/[id]" options={{ presentation: 'modal'}} />
           <Stack.Screen name="(profile)" options={{ headerTitle: "Profile" }} />
         </Stack>
       </ThemeProvider>

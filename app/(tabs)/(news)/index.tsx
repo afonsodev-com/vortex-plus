@@ -7,7 +7,7 @@ import { news } from '../../../data/news';
 export default function NewsScreen() {
   return (
     <SafeAreaView style={{flex:1 ,marginTop: 40}}>
-        <Header />
+      <Header />
       <ScrollView showsVerticalScrollIndicator={false}>
         <YStack mt="$1" p="$2" borderRadius={5}>
           {news.map((item) => (

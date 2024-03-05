@@ -3,6 +3,7 @@ import React from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { Text, Paragraph, Avatar, YStack, XStack, Button } from 'tamagui';
 import { Ionicons, Feather } from '@expo/vector-icons';
+import { useNavigation } from 'expo-router';
 
 const avatars = [
   'https://i.imgur.com/QnhmfUC.png',
@@ -13,6 +14,7 @@ const avatars = [
 ];
 
 const ProfileScreen: React.FC = () => {
+  const navigation = useNavigation();
   return (
     <YStack>
       <FlatList
@@ -39,23 +41,23 @@ const ProfileScreen: React.FC = () => {
           <Text ml="$2">Gerenciar perfil</Text>
         </XStack>
       </TouchableOpacity>
-      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4">
+      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4" onPress={() => navigation.navigate('list')}>
         <Ionicons name="checkmark" size={24} color="white" />
         <Text>My List</Text>
       </Button>
-      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4">
+      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4" onPress={() => navigation.navigate('settings')}>
         <Ionicons name="settings-outline" size={24} color="white" />
         <Text>App Settings</Text>
       </Button>
-      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4">
+      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4" onPress={() => navigation.navigate('plans')}>
         <Ionicons name="checkbox-outline" size={24} color="white" />
         <Text>Plan</Text>
       </Button>
-      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4">
+      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4" onPress={() => navigation.navigate('account')}>
         <Ionicons name="person-circle-outline" size={24} color="white" />
         <Text>Account</Text>
       </Button>
-      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4">
+      <Button size="$5" bg="$gray1" br="$3" p="$2" my="$1" justifyContent="flex-start" pl="$4" onPress={() => navigation.navigate('help')}>
         <Ionicons name="help-circle-outline" size={24} color="white" />
         <Text>Help</Text>
       </Button>

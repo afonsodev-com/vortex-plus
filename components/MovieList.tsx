@@ -20,7 +20,7 @@ const MovieList: React.FC<MovieListProps> = ({ title, movies }) => {
 
   return (
     <YStack mt="$4" ml="$2">
-      <H5 mb="$2" color="white" fontWeight="$7">
+      <H5 mb="$2" color="white" fontWeight="$7" style={{ textTransform: 'none' }}>
         {title}
       </H5>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
