@@ -3,11 +3,7 @@ import { SafeAreaView, ScrollView } from 'react-native';
 import Header from '../../../components/Header';
 import FeaturedMovie from '../../../components/FeaturedMovies';
 import MovieList from '../../../components/MovieList';
-import { movies } from '../../../data/movies';
-
-function filterMoviesByCategory(movies, category) {
-  return movies.filter(movie => movie.categories.includes(category));
-}
+import { movies, series } from '../../../data/data';
 
 export default function HomeScreen() {
   return (
@@ -15,13 +11,14 @@ export default function HomeScreen() {
       <Header />
       <ScrollView showsVerticalScrollIndicator={false}>
         <FeaturedMovie movies={movies} />
-        <MovieList title="Trending" movies={filterMoviesByCategory(movies, 'Action')} />
-        <MovieList title="Most Watched" movies={filterMoviesByCategory(movies, 'Adventure')} />
-        <MovieList title="Popular Series" movies={filterMoviesByCategory(movies, 'Fantasy')} />
-        <MovieList title="Suspense Series" movies={filterMoviesByCategory(movies, 'Warrior')} />
-        <MovieList title="Family Friend" movies={filterMoviesByCategory(movies, 'Family')} />
-        <MovieList title="Comedy and TV" movies={filterMoviesByCategory(movies, 'Comedy')} />
-        <MovieList title="Science Fiction" movies={filterMoviesByCategory(movies, 'Sci-Fi')} />
+        <MovieList title="Trending" movies={movies} />
+        <MovieList title="Most Watched" movies={movies} />
+        <MovieList title="Popular Series" movies={series} />
+        <MovieList title="Suspense Series" movies={series} />
+        <MovieList title="Family Friend" movies={movies} />
+        <MovieList title="Comedy and TV" movies={movies} />
+        <MovieList title="Science Fiction" movies={movies} />
+        <MovieList title="Cartoon" movies={movies} />
       </ScrollView>
     </SafeAreaView>
   );

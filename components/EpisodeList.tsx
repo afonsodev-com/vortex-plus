@@ -11,6 +11,7 @@ interface Episode {
   poster: string;
   duration: string;
   videoUrl: string;
+  season: number;
 }
 
 const EpisodeItem: React.FC<{ episode: Episode, handlePlayVideo: (videoUrl: string) => void }> = ({ episode, handlePlayVideo }) => (
@@ -47,10 +48,21 @@ export const EpisodeList: React.FC<{ episodes: Episode[] }> = ({ episodes }) => 
     return null;
   }
 
+  // Agrupar episódios por temporada
+  const episodesBySeason = episodes.reduce((acc, episode) => {
+    (acc[episode.season] = acc[episode.season] || []).push(episode);
+    return acc;
+  }, {});
+
   return (
     <YStack gap="$4">
-      {episodes.map((episode) => (
-        <EpisodeItem key={episode.id} episode={episode} handlePlayVideo={handlePlayVideo} />
+      {Object.keys(episodesBySeason).map((season) => (
+        <YStack key={season} gap="$4">
+          <Text color="white" fontWeight="$7">{`Temporada ${season}`}</Text>
+          {episodesBySeason[season].map((episode) => (
+            <EpisodeItem key={episode.id} episode={episode} handlePlayVideo={handlePlayVideo} />
+          ))}
+        </YStack>
       ))}
       <Video
         ref={videoRef}
