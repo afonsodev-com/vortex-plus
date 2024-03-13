@@ -109,8 +109,8 @@ export const series = [
     poster: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/29DgU8r0acAM719FVYQ25Iqwdqk.jpg',
     description: 'The Simpsons é uma série de desenho animado e sitcom de televisão norte-americana criada por Matt Groening para a Fox Broadcasting Company. A série é uma sátira da sociedade norte-americana que narra a vida e o dia a dia de uma família de classe média de  Springfield.',
     categories: ['Adventure', 'Fantasy', 'Romance'],
-    trailerUrl: 'https://vz-fa2537de-4d1.b-cdn.net/6e056564-d6d7-4a1e-82cc-70592bd86027/playlist.m3u8',
-    videoUrl: 'https://vz-fa2537de-4d1.b-cdn.net/6e056564-d6d7-4a1e-82cc-70592bd86027/playlist.m3u8',
+    trailerUrl: 'https://vz-fa2537de-4d1.b-cdn.net/c38940ff-b5a3-4b46-aca7-dbe9b520b79e/playlist.m3u8',
+    videoUrl: 'https://vz-fa2537de-4d1.b-cdn.net/c38940ff-b5a3-4b46-aca7-dbe9b520b79e/playlist.m3u8',
     episodes: [
       {
         id: 1,

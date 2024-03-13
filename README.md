@@ -4,7 +4,7 @@
 </h3>
 
 <p align="center">
-    <img src="public/img/frontend.png" alt="Logo" height=530>
+    <img src="assets/images/ui.png" alt="Logo" height=530>
 </p>
 
 ## :rocket: Tecnologias
