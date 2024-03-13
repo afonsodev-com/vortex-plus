@@ -103,7 +103,7 @@ export const series = [
   {
     id: 200,
     title: 'Os Simpsons',
-    subtitle: 'E se o seu futuro fosse o passado?',
+    subtitle: 'A série é uma paródia satírica do estilo de vida da classe média dos Estados Unidos',
     year: '2014',
     rating: '82%',
     poster: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/29DgU8r0acAM719FVYQ25Iqwdqk.jpg',
