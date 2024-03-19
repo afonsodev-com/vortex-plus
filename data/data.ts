@@ -59,7 +59,7 @@ export const series = [
     poster: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/bJ2VLQXBKkATyGZ5hMC13eBlLVo.jpg',
     description: 'Nesse conto épico, um guerreiro e uma enfermeira vivem uma paixão avassaladora, mas 200 anos os separam.',
     categories: ['Adventure', 'Fantasy', 'Romance'],
-    trailerUrl: 'https://vz-fa2537de-4d1.b-cdn.net/6e056564-d6d7-4a1e-82cc-70592bd86027/playlist.m3u8',
+    trailerUrl: 'https://firebasestorage.googleapis.com/v0/b/vortex-plus-b06f7.appspot.com/o/The_Simpsons_-_Homer_Confronts_Marge_With_A_Song-imdb-504021785-hls-8008.mp4?alt=media&token=061a8463-a027-4b83-92e7-392ece258a5f',
     videoUrl: 'https://vz-fa2537de-4d1.b-cdn.net/6e056564-d6d7-4a1e-82cc-70592bd86027/playlist.m3u8',
     episodes: [
       {
@@ -109,7 +109,7 @@ export const series = [
     poster: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/29DgU8r0acAM719FVYQ25Iqwdqk.jpg',
     description: 'The Simpsons é uma série de desenho animado e sitcom de televisão norte-americana criada por Matt Groening para a Fox Broadcasting Company. A série é uma sátira da sociedade norte-americana que narra a vida e o dia a dia de uma família de classe média de  Springfield.',
     categories: ['Adventure', 'Fantasy', 'Romance'],
-    trailerUrl: 'https://vz-fa2537de-4d1.b-cdn.net/c38940ff-b5a3-4b46-aca7-dbe9b520b79e/playlist.m3u8',
+    trailerUrl: 'https://firebasestorage.googleapis.com/v0/b/vortex-plus-b06f7.appspot.com/o/The_Simpsons_-_Homer_Confronts_Marge_With_A_Song-imdb-504021785-hls-8008.mp4?alt=media&token=061a8463-a027-4b83-92e7-392ece258a5f',
     videoUrl: 'https://vz-fa2537de-4d1.b-cdn.net/c38940ff-b5a3-4b46-aca7-dbe9b520b79e/playlist.m3u8',
     episodes: [
       {

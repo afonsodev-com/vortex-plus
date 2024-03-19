@@ -8,8 +8,8 @@ const firebaseConfig = {
   projectId: "vortex-plus-b06f7",
   storageBucket: "vortex-plus-b06f7.appspot.com",
   messagingSenderId: "690193069668",
-  appId: "1:690193069668:web:c234a66093a9140d8d1171",
-  measurementId: "G-VHW2WYFY4J"
+  appId: "1:690193069668:web:8fb20f9651df91628d1171",
+  measurementId: "G-5ENQQLXGXG"
 };
 
 const app = initializeApp(firebaseConfig);

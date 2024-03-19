@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "vortex-plus",
-    "slug": "vortex-plus",
+    "name": "expo-router-example",
+    "slug": "expo-router-example",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "vortex-plus",
+    "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -16,8 +16,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "requireFullScreen": true
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
