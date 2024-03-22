@@ -1,8 +1,8 @@
 // app/(tabs)/(news)/index.tsx
 import { Text, Image, XStack, YStack, Card, View } from 'tamagui';
 import { ScrollView, SafeAreaView } from 'react-native';
-import Header from '../../../components/Header';
-import { news } from '../../../data/news';
+import Header from '@/components/Header';
+import { news } from '@/data/news';
 
 export default function NewsScreen() {
   return (

@@ -1,9 +1,9 @@
 // app/(tabs)/(home)/index.tsx
 import { SafeAreaView, ScrollView } from 'react-native';
-import Header from '../../../components/Header';
-import FeaturedMovie from '../../../components/FeaturedMovies';
-import MovieList from '../../../components/MovieList';
-import { movies, series } from '../../../data/data';
+import Header from '@/components/Header';
+import FeaturedMovie from '@/components/FeaturedMovies';
+import MovieList from '@/components/MovieList';
+import { movies, series } from '@/data/data';
 
 export default function HomeScreen() {
   return (

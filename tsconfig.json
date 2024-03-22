@@ -3,6 +3,7 @@
   "compilerOptions": {
     "jsx": "react-native",
     "paths": {
+      "@/*": ["./src/*"],
       "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
     },
     "strict": true,

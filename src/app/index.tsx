@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { loginUser } from './auth';
 import { useNavigation } from 'expo-router';
-import { Button, Input, YStack } from 'tamagui';
-import { Image, View, Alert } from 'react-native';
+import { Button, Input, YStack, Text } from 'tamagui';
+import { Image, View, Alert, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Link } from 'expo-router';
 
 export default function App() {
   const [email, setEmail] = useState('');
@@ -12,6 +13,18 @@ export default function App() {
   const navigation = useNavigation();
 
   const handleSubmit = async () => {
+    const emailRegex = /\S+@\S+\.\S+/;
+
+    if (!email || !password) {
+      Alert.alert("Erro", "Por favor, preencha todos os campos!");
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      Alert.alert("Erro", "Por favor, insira um email válido!");
+      return;
+    }
+
     const user = await loginUser(email, password);
     if (user) {
       Alert.alert("Sucesso", "Login realizado com sucesso!");
@@ -65,7 +78,14 @@ export default function App() {
         >
           Login
         </Button>
+        <TouchableOpacity style={{ marginTop: 20 }}>
+          <Link href="/register">
+            <Text theme="alt1" textAlign="center">
+              Não tem uma conta? Crie aqui
+            </Text>
+          </Link>
+        </TouchableOpacity>
       </YStack>
     </YStack>
   );
-}
+};

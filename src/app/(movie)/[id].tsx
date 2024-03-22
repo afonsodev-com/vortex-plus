@@ -4,11 +4,11 @@ import { Text, H5, ScrollView, View, Button, XStack, YStack, Tabs } from "tamagu
 import { SafeAreaView } from "react-native";
 import { Ionicons, MaterialIcons, Feather } from '@expo/vector-icons';
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import { movies, series } from "../../data/data";
+import { movies, series } from "@/data/data";
 import { useRoute } from "@react-navigation/native";
-import { EpisodeList } from "../../components/EpisodeList";
-import SimilarTitles from "../../components/SimilarTitles";
-import VideoPlayer from "../../components/VideoPlayer";
+import { EpisodeList } from "@/components/EpisodeList";
+import SimilarTitles from "@/components/SimilarTitles";
+import VideoPlayer from "@/components/VideoPlayer";
 
 interface Content {
   id: number;

@@ -1,9 +1,11 @@
 // app/(profile)/index.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { Text, Paragraph, Avatar, YStack, XStack, Button } from 'tamagui';
 import { Ionicons, Feather } from '@expo/vector-icons';
 import { useNavigation } from 'expo-router';
+import { logoutUser } from '../auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const avatars = [
   'https://i.imgur.com/QnhmfUC.png',
@@ -14,7 +16,45 @@ const avatars = [
 ];
 
 const ProfileScreen: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [user, setUser] = useState(null);
   const navigation = useNavigation();
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      await AsyncStorage.setItem('userLoggedIn', 'false');
+      setIsLoggedIn(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const userLoggedIn = await AsyncStorage.getItem('userLoggedIn');
+      setIsLoggedIn(userLoggedIn === 'true');
+    };
+    checkLogin();
+  }, []);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const storedUser = await AsyncStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigation.navigate('index');
+    }
+  }, [isLoggedIn]);
+
   return (
     <YStack>
       <FlatList
@@ -26,6 +66,7 @@ const ProfileScreen: React.FC = () => {
               <Avatar.Image src={item} />
               <Avatar.Fallback bc="red" />
             </Avatar>
+            <Text>{user ? user.username : 'Visitante'}</Text>
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item}
@@ -62,7 +103,7 @@ const ProfileScreen: React.FC = () => {
         <Text>Help</Text>
       </Button>
         <YStack alignItems="center" justifyContent="center" my="$7">
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleLogout}>
             <XStack alignItems="center">
               <Ionicons name="log-out-outline" size={24} color="white" />
               <Text ml="$2">Sign Out</Text>

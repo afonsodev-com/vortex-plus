@@ -4,9 +4,9 @@ import { SplashScreen, Stack } from "expo-router";
 import { TamaguiProvider } from "tamagui";
 import { getAuth, User, onAuthStateChanged } from "firebase/auth";
 
-import "../tamagui-web.css";
+import "../../tamagui-web.css";
 
-import { config } from "../tamagui.config";
+import { config } from "../../tamagui.config";
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
 

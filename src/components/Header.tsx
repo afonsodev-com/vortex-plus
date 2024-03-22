@@ -13,7 +13,7 @@ const Header: React.FC = () => {
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
       <Image
-        source={require('../assets/images/favicon.png')}
+        source={require('../../assets/images/favicon.png')}
         style={{ width: 30, height: 30, marginLeft: 10 }}
       />
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
