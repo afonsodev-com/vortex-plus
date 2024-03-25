@@ -86,7 +86,7 @@ export default function RegisterScreen() {
         </YStack>
       ) : (
         <View flex={1}>
-          <YStack padding="$2" space="$5">
+          <YStack padding="$2" py="$5" space="$5">
             <Text fontSize="$7" textAlign='center'>Choose the plan that's right for you!</Text>
             <View space="$3" px="$5">
               <Text>Watch as much as you want.</Text>

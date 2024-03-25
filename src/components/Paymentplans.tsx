@@ -11,12 +11,12 @@ const PaymentPlans = ({ onPlanSelect }) => {
       videoQuality: 'Resolution adaptable SD/HD',
       profile: 'Have up to 4 profiles',
       devices: 'Watch on 2 devices at the same time',
-      price: '$9.90 / Month'
+      price: '$ 9.90 / Month'
     },
     {
       name: 'Plus Plan',
       catalogAccess: 'Full catalog access',
-      videoQuality: 'Resolution Full HD',
+      videoQuality: 'Resolution HD/4K',
       profile: 'Have up to 4 profiles',
       devices: 'Watch on 4 devices at the same time',
       price: '$ 14.90 / Month'
