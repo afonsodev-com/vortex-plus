@@ -95,6 +95,9 @@ export default function RegisterScreen() {
             </View>
             <PaymentPlans onPlanSelect={setPlan} />
           </YStack>
+          <View flex={1} justifyContent="flex-end" alignItems="center" py="$7" >
+            <Button width={350} borderRadius="$1" onPress={handleSubmit}>Confirmar</Button>
+          </View>
         </View>
       )}
     </YStack>

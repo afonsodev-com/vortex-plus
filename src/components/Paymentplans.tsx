@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Card, H2, Text, Paragraph, XStack, View, ScrollView, Checkbox } from 'tamagui';
+import { Button, Card, H2, Text, Paragraph, XStack, View, ScrollView } from 'tamagui';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const PaymentPlans = ({ onPlanSelect }) => {
-  const [selectedPlan, setSelectedPlan] = useState(null);
   const plans = [
     {
       name: 'Basic Plan',
@@ -22,11 +21,6 @@ const PaymentPlans = ({ onPlanSelect }) => {
       price: '$ 14.90 / Month'
     }
   ];
-
-  const handleCheckboxChange = (plan) => {
-    setSelectedPlan(plan);
-    onPlanSelect(plan);
-  };
 
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
