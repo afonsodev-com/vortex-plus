@@ -56,6 +56,7 @@ function RootLayoutNav() {
     <TamaguiProvider config={config} defaultTheme="dark">
       <ThemeProvider value={DarkTheme}>
         <Stack>
+          <Stack.Screen name="register"  />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(movie)/[id]" options={{ presentation: 'modal'}} />
           <Stack.Screen name="(profile)" options={{ headerTitle: "Profile" }} />

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Card, H2, Text, Paragraph, XStack, View, ScrollView } from 'tamagui';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Alert } from 'react-native';
 
 const PaymentPlans = ({ onPlanSelect }) => {
+  const [selectedPlanName, setSelectedPlanName] = useState(null);
   const plans = [
     {
       name: 'Basic Plan',
@@ -22,13 +24,21 @@ const PaymentPlans = ({ onPlanSelect }) => {
     }
   ];
 
+  const handleSelectPlan = (plan) => {
+    setSelectedPlanName(plan.name);
+    onPlanSelect(plan);
+  };
+
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <XStack paddingHorizontal="$2" space="$5">
         {plans.map((plan, index) => (
-          <Card key={index} elevate size="$4" bordered width={360} height={300}>
+          <Card key={index} elevate size="$4" bordered width={360} height={300} onPress={() => handleSelectPlan(plan)}>
             <Card.Header padded>
-              <H2 fontWeight="$1" textAlign='center'>{plan.name}</H2>
+              <View flexDirection="row" alignItems="center" justifyContent="center">
+                <H2 fontWeight="$1">{plan.name}</H2>
+                <MaterialIcons name={selectedPlanName === plan.name ? "check-circle" : "radio-button-unchecked"} size={24} color="green" />
+              </View>
             </Card.Header>
             <Card.Header padded space="$3">
               <XStack space>

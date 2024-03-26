@@ -13,6 +13,13 @@ export default function RegisterScreen() {
   const [plan, setPlan] = useState(null);
   const [step, setStep] = useState(1);
 
+  const handleConfirm = async () => {
+    if (!plan) {
+      Alert.alert("Erro", "Por favor, escolha um plano!");
+      return;
+    }
+  };
+
   useEffect(() => {
     const emailPrefix = email.split('@')[0];
     setUsername(emailPrefix);
@@ -96,7 +103,7 @@ export default function RegisterScreen() {
             <PaymentPlans onPlanSelect={setPlan} />
           </YStack>
           <View flex={1} justifyContent="flex-end" alignItems="center" py="$7" >
-            <Button width={350} borderRadius="$1" onPress={handleSubmit}>Confirmar</Button>
+            <Button width={350} borderRadius="$1" onPress={handleConfirm}>Confirmar</Button>
           </View>
         </View>
       )}
