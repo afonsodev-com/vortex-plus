@@ -12533,6 +12533,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-pager-view@npm:6.2.3":
+  version: 6.2.3
+  resolution: "react-native-pager-view@npm:6.2.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 9c08c9ffc27f3b6069f23d24ba5c1073a55fb67db4a45bcf490e544a37f26a9cfe7ad72259543f71f3f78a1fb26c78f711c076d905389d599c69c43fe29b7a67
+  languageName: node
+  linkType: hard
+
 "react-native-reanimated@npm:~3.6.2":
   version: 3.6.2
   resolution: "react-native-reanimated@npm:3.6.2"
@@ -14627,6 +14637,7 @@ __metadata:
     react-helmet-async: "npm:~2.0.4"
     react-native: "npm:0.73.5"
     react-native-gesture-handler: "npm:~2.14.0"
+    react-native-pager-view: "npm:6.2.3"
     react-native-reanimated: "npm:~3.6.2"
     react-native-safe-area-context: "npm:4.8.2"
     react-native-screens: "npm:~3.29.0"

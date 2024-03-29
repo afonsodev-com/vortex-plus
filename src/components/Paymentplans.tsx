@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Button, Card, H2, Text, Paragraph, XStack, View, ScrollView } from 'tamagui';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Alert } from 'react-native';
 
-const PaymentPlans = ({ onPlanSelect }) => {
+interface PaymentPlansProps {
+  onPlanSelect: (plan: Plan) => void;
+}
+
+const PaymentPlans: FC<PaymentPlansProps> = ({ onPlanSelect }) => {
   const [selectedPlanName, setSelectedPlanName] = useState(null);
   const plans = [
     {
@@ -24,7 +28,7 @@ const PaymentPlans = ({ onPlanSelect }) => {
     }
   ];
 
-  const handleSelectPlan = (plan) => {
+  const handleSelectPlan = (plan: Plan) => {
     setSelectedPlanName(plan.name);
     onPlanSelect(plan);
   };
@@ -37,28 +41,28 @@ const PaymentPlans = ({ onPlanSelect }) => {
             <Card.Header padded>
               <View flexDirection="row" alignItems="center" justifyContent="center">
                 <H2 fontWeight="$1">{plan.name}</H2>
-                <MaterialIcons name={selectedPlanName === plan.name ? "check-circle" : "radio-button-unchecked"} size={24} color="green" />
+                <MaterialIcons name={selectedPlanName === plan.name ? "check-circle" : "radio-button-unchecked"} size={24} color="gray" />
               </View>
             </Card.Header>
             <Card.Header padded space="$3">
               <XStack space>
-                <MaterialIcons name="check" size={24} color="red" />
+                <MaterialIcons name="check" size={24} color="gray" />
                 <Paragraph>{plan.videoQuality}</Paragraph>
               </XStack>
               <XStack space>
-                <MaterialIcons name="check" size={24} color="red" />
+                <MaterialIcons name="check" size={24} color="gray" />
                 <Paragraph>{plan.catalogAccess}</Paragraph>
               </XStack>
               <XStack space>
-                <MaterialIcons name="check" size={24} color="red" />
+                <MaterialIcons name="check" size={24} color="gray" />
                 <Paragraph>{plan.profile}</Paragraph>
               </XStack>
               <XStack space>
-                <MaterialIcons name="check" size={24} color="red" />
+                <MaterialIcons name="check" size={24} color="gray" />
                 <Paragraph>{plan.devices}</Paragraph>
               </XStack>
               <XStack space>
-                <MaterialIcons name="check" size={24} color="red" />
+                <MaterialIcons name="check" size={24} color="gray" />
                 <Paragraph>{plan.price}</Paragraph>
               </XStack>
             </Card.Header>
