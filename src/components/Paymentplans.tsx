@@ -8,7 +8,7 @@ interface PaymentPlansProps {
 }
 
 const PaymentPlans: FC<PaymentPlansProps> = ({ onPlanSelect }) => {
-  const [selectedPlanName, setSelectedPlanName] = useState(null);
+  const [selectedPlanName, setSelectedPlanName] = useState<string | null>(null);
   const plans = [
     {
       name: 'Basic Plan',

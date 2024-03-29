@@ -78,7 +78,7 @@ export default function App() {
         >
           Login
         </Button>
-        <TouchableOpacity style={{ marginTop: 20 }}>
+        <TouchableOpacity style={{ marginTop: 20, backgroundColor: 'blue', padding: 10, alignItems: 'center', justifyContent: 'center' }}>
           <Link href="/register">
             <Text theme="alt1" textAlign="center">
               Não tem uma conta? Crie aqui
