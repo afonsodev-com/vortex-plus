@@ -39,13 +39,13 @@ export async function loginUser(email: string, password: string) {
   }
 }
 
-export async function registerUser(email: string, password: string, username: string) {
+export async function registerUser(email: string, password: string, username: string, plan: any) {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
     // Crie um novo documento no Firestore para o usuário
-    const userDetails = { username, email };
+    const userDetails = { username, email, plan };
     await setDoc(doc(db, 'users', user.uid), userDetails);
 
     // Armazene os detalhes do usuário no AsyncStorage

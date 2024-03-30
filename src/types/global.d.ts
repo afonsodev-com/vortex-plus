@@ -1,4 +1,5 @@
 interface Plan {
+  id: string;
   name: string;
   catalogAccess: string;
   videoQuality: string;

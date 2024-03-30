@@ -3,6 +3,7 @@ import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { SplashScreen, Stack } from "expo-router";
 import { TamaguiProvider } from "tamagui";
 import { getAuth, User, onAuthStateChanged } from "firebase/auth";
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 import "../../tamagui-web.css";
 
@@ -55,12 +56,16 @@ function RootLayoutNav() {
   return (
     <TamaguiProvider config={config} defaultTheme="dark">
       <ThemeProvider value={DarkTheme}>
+        <StripeProvider
+          publishableKey="pk_live_51OxCqWCofT1MBGPJA74YSwcKZmVsWT9ox0wz8ABNwTSbj1dz1fQ6cxrR7mombhjr8bVELDfl9Zs9jeLUxZWqn58X00BLhdjiAl"
+        >
         <Stack>
           <Stack.Screen name="register"  />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(movie)/[id]" options={{ presentation: 'modal'}} />
           <Stack.Screen name="(profile)" options={{ headerTitle: "Profile" }} />
         </Stack>
+      </StripeProvider>
       </ThemeProvider>
     </TamaguiProvider>
   );

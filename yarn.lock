@@ -4191,6 +4191,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stripe/stripe-react-native@npm:^0.37.1":
+  version: 0.37.1
+  resolution: "@stripe/stripe-react-native@npm:0.37.1"
+  peerDependencies:
+    expo: ">=46.0.9"
+    react: "*"
+    react-native: "*"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: cbda955e003a6c3be2bbec71f056d11b45f291c3981dc5a5fe0f4cdbb89f92ac928e388672ef86b4fe6f000d04cb00119c01e3f6ef75d0ffc9d327b2ec351fd9
+  languageName: node
+  linkType: hard
+
 "@swc/core-darwin-arm64@npm:1.4.1":
   version: 1.4.1
   resolution: "@swc/core-darwin-arm64@npm:1.4.1"
@@ -14613,6 +14627,7 @@ __metadata:
     "@firebase/firestore": "npm:^4.4.2"
     "@react-native-async-storage/async-storage": "npm:1.21.0"
     "@react-navigation/native": "npm:^6.0.2"
+    "@stripe/stripe-react-native": "npm:^0.37.1"
     "@tamagui/config": "npm:^1.91.4"
     "@tamagui/metro-plugin": "npm:^1.91.4"
     "@tamagui/toast": "npm:^1.92.0"

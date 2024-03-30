@@ -5,18 +5,37 @@ import { Button, Input, View, YStack, Text, Image, H2 } from 'tamagui';
 import { Alert, TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import PaymentPlans from '@/components/Paymentplans';
+import Payment from '@/components/payment';
+
+enum Step {
+  Register = 1,
+  ChoosePlan = 2,
+}
 
 export default function RegisterScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [plan, setPlan] = useState(null);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState<Step | null>(Step.Register);
 
   const handleConfirm = async () => {
     if (!plan) {
       Alert.alert("Erro", "Por favor, escolha um plano!");
       return;
+    }
+
+    setStep(null);
+    
+    try {
+      const user = await registerUser(email, password, username, plan);
+      
+      if (user) {
+
+        Alert.alert("Sucesso", "Registro realizado com sucesso!");
+      }
+    } catch (error) {
+      Alert.alert("Erro", error.message);
     }
   };
 
@@ -41,21 +60,13 @@ export default function RegisterScreen() {
     if (step === 1) {
       setStep(2);
     } else {
-      if (!plan) {
-        Alert.alert("Erro", "Por favor, escolha um plano!");
-        return;
-      }
-
-      const user = await registerUser(email, password, username, plan);
-      if (user) {
-        Alert.alert("Sucesso", "Registro realizado com sucesso!");
-      }
+      handleConfirm();
     }
   };
 
   return (
     <YStack flex={1} justifyContent="center" space="$3">
-      {step === 1 ? (
+      {step === Step.Register ? (
         <YStack width={250} alignSelf="center" space="$3">
           <View style={{alignItems: 'center', marginBottom: 40}}>
             <Image
@@ -91,7 +102,7 @@ export default function RegisterScreen() {
             </Link>
           </TouchableOpacity>
         </YStack>
-      ) : (
+      ) : step === Step.ChoosePlan ? (
         <View flex={1}>
           <YStack padding="$2" py="$5" space="$5">
             <Text fontSize="$7" textAlign='center'>Choose the plan that's right for you!</Text>
@@ -105,6 +116,10 @@ export default function RegisterScreen() {
           <View flex={1} justifyContent="flex-end" alignItems="center" py="$7" >
             <Button width={350} borderRadius="$1" onPress={handleConfirm}>Confirmar</Button>
           </View>
+        </View>
+      ) : (
+        <View flex={1}>
+          <Payment />
         </View>
       )}
     </YStack>
