@@ -1,8 +1,7 @@
-import React, { useRef, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { YStack, Text, Image, XStack } from "tamagui";
 import { TouchableOpacity } from "react-native";
-import { Video, AVPlaybackStatus } from 'expo-av';
-import * as ScreenOrientation from 'expo-screen-orientation';
+import VideoPlayer from './VideoPlayer';
 
 interface Episode {
   description: string;
@@ -30,25 +29,16 @@ const EpisodeItem: React.FC<{ episode: Episode, handlePlayVideo: (videoUrl: stri
 );
 
 export const EpisodeList: React.FC<{ episodes: Episode[] }> = ({ episodes }) => {
-  const videoRef = useRef<Video>(null);
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
-  const handlePlayVideo = useCallback(async (videoUrl: string) => {
-    if (videoRef.current) {
-      try {
-        await videoRef.current.loadAsync({ uri: videoUrl }, {}, false);
-        await videoRef.current.playAsync();
-        await videoRef.current.presentFullscreenPlayer();
-      } catch (error) {
-        console.error("Error loading video", error);
-      }
-    }
-  }, [videoRef]);
+  const handlePlayVideo = useCallback((videoUrl: string) => {
+    setVideoUrl(videoUrl)
+  }, []);
 
   if (!episodes) {
     return null;
   }
 
-  // Agrupar episódios por temporada
   const episodesBySeason = episodes.reduce((acc, episode) => {
     (acc[episode.season] = acc[episode.season] || []).push(episode);
     return acc;
@@ -64,19 +54,7 @@ export const EpisodeList: React.FC<{ episodes: Episode[] }> = ({ episodes }) => 
           ))}
         </YStack>
       ))}
-      <Video
-        ref={videoRef}
-        style={{ width: "100%", height: "100%" }}
-        useNativeControls
-        resizeMode="contain"
-        onFullscreenUpdate={async (event) => {
-          if (event.fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_DID_PRESENT) {
-            await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
-          } else if (event.fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_DID_DISMISS) {
-            await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
-          }
-        }}
-      />
+      {videoUrl && <VideoPlayer videoUri={videoUrl} autoPlay={true}/>}
     </YStack>
   );
 };

@@ -33,7 +33,7 @@ const FeaturedMovies: React.FC<FeaturedMoviesProps> = ({ movies }) => {
   return (
     <YStack mt="$1" p="$2" borderRadius={5} alignItems='center'>
       <Link href={`(movie)/${movie.id}`} key={movie.id}>
-        <Card elevate size="$4" width={340} height={410} borderRadius={10} borderColor={'gray'} borderWidth={0.2} overflow='hidden'>
+        <Card elevate size="$4" width={340} height={400} borderRadius={10} borderColor={'gray'} borderWidth={0.5} overflow='hidden'>
           <Image
             source={{ uri: movie.poster }}
             width="100%"
@@ -42,7 +42,7 @@ const FeaturedMovies: React.FC<FeaturedMoviesProps> = ({ movies }) => {
             resizeMode="cover"
           />
             <LinearGradient
-              colors={['rgba(0,0,0,0.5)', 'transparent']}
+              colors={['rgba(0,0,0,0.2)', 'transparent']}
               style={{
                 position: 'absolute',
                 left: 0,
@@ -67,14 +67,14 @@ const FeaturedMovies: React.FC<FeaturedMoviesProps> = ({ movies }) => {
             p="$3"
           >
             <Text mb="$3" textAlign='center'>{movie.categories.join(' • ')}</Text>
-            <XStack gap="$2" justifyContent="center">
+            <XStack gap="$3" justifyContent="center">
               <XStack alignItems="center">
-                <Button backgroundColor={'white'} color={'black'} borderRadius="$1" size="$3.5" onPress={() => {}} icon={<Ionicons name="play" size={20} color="black" />}>
+                <Button backgroundColor={'white'} color={'black'} borderRadius="$1" size="$3.5" width="$12" onPress={() => {}} icon={<Ionicons name="play" size={20} color="black" />}>
                   Play
                 </Button>
               </XStack>
               <XStack alignItems="center">
-                <Button backgroundColor={'$gray'} color={'white'} borderRadius="$1" size="$3.5" onPress={() => {}} icon={<Ionicons name="add-sharp" size={20} color="white" />}>
+                <Button backgroundColor={'$gray'} color={'white'} borderRadius="$1" size="$3.5" width="$12" onPress={() => {}} icon={<Ionicons name="add-sharp" size={20} color="white" />}>
                   My List
                 </Button>
               </XStack>
