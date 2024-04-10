@@ -23,7 +23,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { db } from '../../../firebase';
+import { db } from '@/lib/firebase';
 import { collection, getDocs, onSnapshot, DocumentData } from 'firebase/firestore';
 
 export default function Database() {

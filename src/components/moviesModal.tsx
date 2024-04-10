@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { db } from '../../firebase';
+import { db } from '../lib/firebase';
 import { collection, doc, setDoc } from "firebase/firestore";
 import { useToast } from "@/components/ui/use-toast"
 import { CheckCircle, PlusCircle } from 'lucide-react';

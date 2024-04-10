@@ -30,7 +30,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { useEffect, useState } from 'react';
-import { db } from '../../../firebase';
+import { db } from '@/lib/firebase';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 
 interface Movie {
