@@ -149,16 +149,9 @@ const totalSubscriptions = customers.filter(
   (customer) => customer.status === "Approved"
 ).length;
 
-const customersPerPlan = customers.reduce((acc, customer) => {
-  const planName = customer.plano.name;
-  if (!acc[planName]) {
-    acc[planName] = 0;
-  }
-  acc[planName]++;
-  return acc;
-}, {});
-
+const totalSales = customers.length;
 const activeNow = 573;
+
 
 const cardData = [
   {
@@ -174,9 +167,9 @@ const cardData = [
     percentage: "+180.1% from last month",
   },
   {
-    title: "Customers per Plan",
-    icon: Users,
-    value: `Basic: ${customersPerPlan['Basic Plan']}, Plus: ${customersPerPlan['Plus Plan']}`,
+    title: "Sales",
+    icon: CreditCard,
+    value: `+${totalSales}`,
     percentage: "+19% from last month",
   },
   {
