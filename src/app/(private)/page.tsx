@@ -136,6 +136,30 @@ const customers = [
     valor: plans['1'].price,
     plano: plans['1'],
   },
+  {
+    username: "Sophia Davis",
+    email: "sophia@example.com",
+    status: "Approved",
+    data: "2023-06-28",
+    valor: plans['2'].price,
+    plano: plans['2'],
+  },
+  {
+    username: "Lucas Miller",
+    email: "lucas@example.com",
+    status: "Declined",
+    data: "2023-06-29",
+    valor: plans['1'].price,
+    plano: plans['1'],
+  },
+  {
+    username: "Mia Wilson",
+    email: "mia@example.com",
+    status: "Approved",
+    data: "2023-06-30",
+    valor: plans['2'].price,
+    plano: plans['2'],
+  },
 ];
 
 const totalRevenue = customers.reduce((total, customer) => {
@@ -204,9 +228,7 @@ export default function Dashboard() {
           ))}
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-          <Card
-            className="xl:col-span-2" x-chunk="dashboard-01-chunk-4"
-          >
+          <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
                 <CardTitle>Transactions</CardTitle>
@@ -222,7 +244,7 @@ export default function Dashboard() {
               </Button>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={350}>
+              <ResponsiveContainer width="100%" height={515}>
                 <BarChart data={data}>
                   <XAxis
                     dataKey="name"
@@ -250,13 +272,13 @@ export default function Dashboard() {
           </Card>
           <Card x-chunk="dashboard-01-chunk-5">
             <CardHeader>
-              <CardTitle>Recent Sales</CardTitle>
+              <CardTitle>Most recent subscribers</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-8">
               {customers.map((customer, index) => (
                 <div key={index} className="flex items-center gap-4">
                   <Avatar className="hidden h-9 w-9 sm:flex">
-                    <AvatarImage src="/avatars/01.png" alt="Avatar" />
+                    <AvatarImage src="https://ui.shadcn.com/avatars/02.png" alt="Avatar" />
                     <AvatarFallback>{customer.username.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <div className="grid gap-1">
