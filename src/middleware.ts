@@ -16,6 +16,7 @@ export default function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/",
+    "/register/:path*",
     "/analytics/:path*",
     "/customers/:path*",
     "/database/:path*",

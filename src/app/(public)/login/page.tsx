@@ -50,7 +50,7 @@ export default function LoginForm() {
         });
         setTimeout(() => {
           router.push("/");
-        }, 2000);
+        }, 600);
       } else {
         await signOut(auth);
         toast({

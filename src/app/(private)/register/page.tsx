@@ -1,12 +1,10 @@
 'use client'
 import Image from "next/image"
 import { unstable_noStore, revalidateTag } from "next/cache"
-import { PlusCircle, MoreHorizontal } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { MoviesModal } from "@/components/moviesModal"
 import { SeriesModal } from "@/components/seriesModal"
-import Header from "@/components/header"
+import { MoviesTable } from "@/components/moviesTable"
+import { SeriesTable } from "@/components/seriesTable"
 import {
   Card,
   CardContent,
@@ -16,21 +14,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import {
   Tabs,
   TabsContent,
   TabsList,
@@ -38,7 +21,7 @@ import {
 } from "@/components/ui/tabs"
 import { useEffect, useState } from 'react';
 import { db } from '@/lib/firebase';
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 
 interface Movie {
   id: string;
@@ -90,6 +73,16 @@ export default function Register() {
     };
   }, []);
 
+  const deleteMovie = async (id: string) => {
+    const movieRef = doc(db, 'movies', id);
+    await deleteDoc(movieRef);
+  }
+
+  const deleteSeries = async (id: string) => {
+    const seriesRef = doc(db, 'series', id);
+    await deleteDoc(seriesRef);
+  }
+
   return (
     <div className="flex h-full w-full flex-col bg-muted/40">
       <div className="flex flex-col sm:gap-4 sm:py-4">
@@ -115,60 +108,9 @@ export default function Register() {
                     Manage your movies and view their details.
                   </CardDescription>
                 </CardHeader>
-                  <CardContent className="overflow-x-auto">
-                    <Table className="w-full">
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="hidden w-auto sm:table-cell">Poster</TableHead>
-                          <TableHead>Title</TableHead>
-                          <TableHead>Subtitle</TableHead>
-                          <TableHead>Year</TableHead>
-                          <TableHead>Rating</TableHead>
-                          <TableHead>Description</TableHead>
-                          <TableHead>Categories</TableHead>
-                          <TableHead>
-                            <span className="sr-only">Actions</span>
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {movies.map((movie, index) => (
-                          <TableRow key={movie.id}>
-                            <TableCell className="hidden w-auto sm:table-cell">
-                              <Image
-                                alt="Movie poster"
-                                className="aspect-square rounded-md object-cover"
-                                height="54"
-                                width="54"
-                                src={movie.posterUrl || '/placeholder.png'}
-                              />
-                            </TableCell>
-                            <TableCell className="font-medium w-auto">{movie.title}</TableCell>
-                            <TableCell className="w-auto">{movie.subtitle}</TableCell>
-                            <TableCell className="w-auto">{movie.year}</TableCell>
-                            <TableCell className="w-auto"><Badge variant="default">{movie.rating}</Badge></TableCell>
-                            <TableCell className="w-auto">{movie.description}</TableCell>
-                            <TableCell className="w-auto"><Badge variant="default">{movie.category}</Badge></TableCell>
-                            <TableCell>
-                              <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                  <Button aria-haspopup="true" size="icon" variant="ghost">
-                                    <MoreHorizontal className="h-4 w-4" />
-                                    <span className="sr-only">Toggle menu</span>
-                                  </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
-                                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                  <DropdownMenuItem>Edit</DropdownMenuItem>
-                                  <DropdownMenuItem>Delete</DropdownMenuItem>
-                                </DropdownMenuContent>
-                              </DropdownMenu>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </CardContent>
+                <CardContent className="overflow-x-auto">
+                  <MoviesTable movies={movies} onDelete={deleteMovie} />
+                </CardContent>
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">
                     Showing <strong>1-10</strong> of <strong>32</strong>{" "}
@@ -186,58 +128,7 @@ export default function Register() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="overflow-x-auto">
-                  <Table className="w-full">
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="hidden w-auto sm:table-cell">Poster</TableHead>
-                        <TableHead>Title</TableHead>
-                        <TableHead>Subtitle</TableHead>
-                        <TableHead>Year</TableHead>
-                        <TableHead>Rating</TableHead>
-                        <TableHead>Description</TableHead>
-                        <TableHead>Categories</TableHead>
-                        <TableHead>
-                          <span className="sr-only">Actions</span>
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {series.map((movie, index) => (
-                        <TableRow key={movie.id}>
-                          <TableCell className="hidden sm:table-cell">
-                          <Image
-                            alt="Movie poster"
-                            className="aspect-square rounded-md object-cover"
-                            height="54"
-                            width="54"
-                            src={movie.posterUrl || '/placeholder.png'}
-                          />
-                          </TableCell>
-                          <TableCell className="font-medium w-auto">{movie.title}</TableCell>
-                          <TableCell className="w-auto">{movie.subtitle}</TableCell>
-                          <TableCell className="w-auto">{movie.year}</TableCell>
-                          <TableCell className="w-auto"><Badge variant="default">{movie.rating}</Badge></TableCell>
-                          <TableCell className="w-auto">{movie.description}</TableCell>
-                          <TableCell className="w-auto"><Badge variant="default">{movie.category}</Badge></TableCell>
-                          <TableCell>
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button aria-haspopup="true" size="icon" variant="ghost">
-                                  <MoreHorizontal className="h-4 w-4" />
-                                  <span className="sr-only">Toggle menu</span>
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
-                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                <DropdownMenuItem>Edit</DropdownMenuItem>
-                                <DropdownMenuItem>Delete</DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                  <SeriesTable series={series} onDelete={deleteSeries} />
                 </CardContent>
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">

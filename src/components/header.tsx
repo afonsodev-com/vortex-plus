@@ -1,22 +1,10 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import {
-  File,
-  Home,
-  LineChart,
-  ListFilter,
-  MoreHorizontal,
-  Package,
-  Package2,
-  PanelLeft,
-  PlusCircle,
-  Search,
-  Settings,
-  ShoppingCart,
-  Users2,
-} from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,13 +23,41 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Cookie from "js-cookie";
+import { auth, db } from "@/lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
+  const [userEmail, setUserEmail] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [userImage, setUserImage] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUserEmail(user.email);
+
+        const userDoc = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDoc);
+
+        if (userDocSnap.exists()) {
+          setUsername(userDocSnap.data().username);
+          setUserImage(userDocSnap.data().image);
+        } else {
+          console.log("No such document!");
+        }
+      } else {
+        setUserEmail(null);
+        setUsername(null);
+        setUserImage(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleLogout = () => {
     Cookie.remove("token");
@@ -86,16 +102,16 @@ export default function Header() {
             className="overflow-hidden rounded-full"
           >
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src={userImage || "https://github.com/shadcn.png"} />
+              <AvatarFallback>{username ? username[0] : 'CN'}</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel>{username ? username : 'My Account'}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem>Support</DropdownMenuItem>
+          <DropdownMenuItem><Link href="/analytics">Analytics</Link></DropdownMenuItem>
+          <DropdownMenuItem><Link href="/settings">Settings</Link></DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
