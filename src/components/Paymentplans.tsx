@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Button, Card, H2, Text, Paragraph, XStack, View, Accordion, Square } from 'tamagui';
+import { Button, Card, H2, Text, Paragraph, XStack, View, Square, RadioGroup, YStack, Label } from 'tamagui';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { Alert } from 'react-native';
 
@@ -8,7 +8,7 @@ interface PaymentPlansProps {
 }
 
 const PaymentPlans: FC<PaymentPlansProps> = ({ onPlanSelect }) => {
-  const [selectedPlanName, setSelectedPlanName] = useState<string | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
 
   const plans = [
     {
@@ -31,57 +31,53 @@ const PaymentPlans: FC<PaymentPlansProps> = ({ onPlanSelect }) => {
     }
   ];
 
-  const handleSelectPlan = (plan: Plan) => {
-    setSelectedPlanName(plan.id);
-    onPlanSelect(plan);
+  const handleSelectPlan = (value: string) => {
+    const plan = plans.find(plan => plan.id === value);
+    if (plan) {
+      setSelectedPlan(plan);
+      onPlanSelect(plan);
+    }
   };
 
-  const verifyPlan = (id: string) => {
-    return selectedPlanName === id;
-  }
-
   return (
-    <Accordion overflow="hidden" type="single" px="$4" space="$2">
-      {plans.map((plan, index) => (
-        <Accordion.Item key={index} value={plan.id} borderColor={verifyPlan(plan.id) ? "#22C55E" : 'transparent'} borderWidth={verifyPlan(plan.id) ? 2 : 0}>
-          <Accordion.Trigger flexDirection="row" justifyContent="space-between" onPress={() => handleSelectPlan(plan)}>
-            {({ open }) => (
-              <>
-              <XStack alignItems='center' space="$2">
-                <Text fontWeight="$1">{plan.name}</Text>
-                <MaterialIcons name={verifyPlan(plan.id) ? "check-circle" : "radio-button-unchecked"} size={24} color="#22C55E" />
-              </XStack>
-                <Square animation="quick" rotate={open ? '180deg' : '0deg'}>
-                  <MaterialIcons name="expand-less" size={24} color="gray" />
-                </Square>
-              </>
-            )}
-          </Accordion.Trigger>
-          <Accordion.Content>
-            <XStack space>
-              <MaterialIcons name="check" size={24} color="gray" />
-              <Paragraph>{plan.videoQuality}</Paragraph>
+    <View px="$4" space="$2">
+      <RadioGroup aria-labelledby="Select one plan" defaultValue={selectedPlan?.id} name="plan" onValueChange={handleSelectPlan}>
+        <YStack space="$2">
+          {plans.map((plan, index) => (
+            <XStack key={index} alignItems='center' space="$2">
+              <RadioGroup.Item value={plan.id} id={`radiogroup-${plan.id}`} size="$3">
+                <RadioGroup.Indicator />
+              </RadioGroup.Item>
+              <Label htmlFor={`radiogroup-${plan.id}`} size="$1">{plan.name}</Label>
             </XStack>
-            <XStack space>
-              <MaterialIcons name="check" size={24} color="gray" />
-              <Paragraph>{plan.catalogAccess}</Paragraph>
-            </XStack>
-            <XStack space>
-              <MaterialIcons name="check" size={24} color="gray" />
-              <Paragraph>{plan.profile}</Paragraph>
-            </XStack>
-            <XStack space>
-              <MaterialIcons name="check" size={24} color="gray" />
-              <Paragraph>{plan.devices}</Paragraph>
-            </XStack>
-            <XStack space>
-              <MaterialIcons name="check" size={24} color="gray" />
-              <Paragraph>{plan.price}</Paragraph>
-            </XStack>
-          </Accordion.Content>
-        </Accordion.Item>
-        ))}
-    </Accordion>
+          ))}
+        </YStack>
+      </RadioGroup>
+      {selectedPlan && (
+        <Card>
+          <XStack space>
+            <MaterialIcons name="check" size={24} color="gray" />
+            <Paragraph>{selectedPlan.videoQuality}</Paragraph>
+          </XStack>
+          <XStack space>
+            <MaterialIcons name="check" size={24} color="gray" />
+            <Paragraph>{selectedPlan.catalogAccess}</Paragraph>
+          </XStack>
+          <XStack space>
+            <MaterialIcons name="check" size={24} color="gray" />
+            <Paragraph>{selectedPlan.profile}</Paragraph>
+          </XStack>
+          <XStack space>
+            <MaterialIcons name="check" size={24} color="gray" />
+            <Paragraph>{selectedPlan.devices}</Paragraph>
+          </XStack>
+          <XStack space>
+            <MaterialIcons name="check" size={24} color="gray" />
+            <Paragraph>{selectedPlan.price}</Paragraph>
+          </XStack>
+        </Card>
+      )}
+    </View>
   );
 };
 

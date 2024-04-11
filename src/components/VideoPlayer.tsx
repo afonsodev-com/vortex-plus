@@ -4,26 +4,26 @@ import { Video, ResizeMode, Audio, AVPlaybackStatus } from 'expo-av';
 
 interface VideoPlayerProps {
   videoUri: string;
-  autoPlay?: boolean;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUri, autoPlay }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUri }) => {
   const videoRef = useRef<Video>(null);
-  const [isPlaying, setIsPlaying] = useState(autoPlay);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const playVideo = async () => {
       if (isPlaying) {
         await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
         videoRef.current?.playAsync();
-        videoRef.current?.presentFullscreenPlayer();
       }
     };
     playVideo();
   }, [isPlaying]);
 
   const handlePlaybackStatusUpdate = (status: AVPlaybackStatus) => {
-    setIsPlaying(status.isPlaying);
+    if ('isPlaying' in status) {
+      setIsPlaying(status.isPlaying);
+    }
   };
 
   return (
@@ -36,7 +36,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUri, autoPlay }) => {
       isMuted={false}
       resizeMode={"cover" as ResizeMode}
       useNativeControls
-      style={{ width: "100%", height: 200,  borderRadius: 2 }}
+      style={{ width: "100%", height: 200, borderRadius: 2 }}
     />
   );
 };

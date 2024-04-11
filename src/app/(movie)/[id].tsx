@@ -10,14 +10,6 @@ import { EpisodeList } from "@/components/EpisodeList";
 import SimilarTitles from "@/components/SimilarTitles";
 import VideoPlayer from "@/components/VideoPlayer";
 
-interface Content {
-  id: number;
-  title: string;
-  poster: string;
-  description: string;
-  videoUri: string;
-  trailerUri: string;
-}
 
 const MovieDetails: React.FC = () => {
   const navigation = useNavigation();
@@ -28,7 +20,6 @@ const MovieDetails: React.FC = () => {
 
   const isSeries = content?.episodes?.length > 0;
 
-  // Abaixo o código é para você conseguir alterar o título da stack para o do filme
   useLayoutEffect(() => {
     if (content) {
       navigation.setOptions({
@@ -88,7 +79,7 @@ const MovieDetails: React.FC = () => {
                 </Tabs.List>
                 {isSeries && (
                   <Tabs.Content value="tab1" p="$2">
-                    <EpisodeList episodes={content.episodes} />
+                    <EpisodeList episodes={content?.episodes} />
                   </Tabs.Content>
                 )}
                 <Tabs.Content value="tab2" p="$2">

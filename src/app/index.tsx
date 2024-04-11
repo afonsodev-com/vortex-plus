@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { loginUser } from './auth';
 import { useNavigation } from 'expo-router';
-import { Button, Input, YStack, Text } from 'tamagui';
+import { Button, Input, YStack, Text, XStack } from 'tamagui';
 import { Image, View, Alert, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link } from 'expo-router';
@@ -78,13 +78,18 @@ export default function App() {
         >
           Login
         </Button>
-        <TouchableOpacity style={{ marginTop: 20, backgroundColor: 'blue', padding: 10, alignItems: 'center', justifyContent: 'center' }}>
+        <XStack mt="$5" alignSelf='center' space="$6">
           <Link href="/register">
-            <Text theme="alt1" textAlign="center">
-              Não tem uma conta? Crie aqui
+            <Text theme="alt1">
+              Don't have an account?
             </Text>
           </Link>
-        </TouchableOpacity>
+          <Link href="/register">
+            <Text>
+              Sign Up
+            </Text>
+          </Link>
+        </XStack>
       </YStack>
     </YStack>
   );

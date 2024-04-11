@@ -5,7 +5,6 @@ import { Button, Input, View, YStack, Text, Image, H2 } from 'tamagui';
 import { Alert, TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import PaymentPlans from '@/components/Paymentplans';
-import Payment from '@/components/payment';
 
 enum Step {
   Register = 1,
@@ -25,13 +24,10 @@ export default function RegisterScreen() {
       return;
     }
 
-    setStep(null);
-    
     try {
       const user = await registerUser(email, password, username, plan);
       
       if (user) {
-
         Alert.alert("Sucesso", "Registro realizado com sucesso!");
       }
     } catch (error) {
@@ -57,8 +53,8 @@ export default function RegisterScreen() {
       return;
     }
 
-    if (step === 1) {
-      setStep(2);
+    if (step === Step.Register) {
+      setStep(Step.ChoosePlan);
     } else {
       handleConfirm();
     }
@@ -117,11 +113,7 @@ export default function RegisterScreen() {
             <Button width={350} borderRadius="$1" onPress={handleConfirm}>Confirmar</Button>
           </View>
         </View>
-      ) : (
-        <View flex={1}>
-          <Payment />
-        </View>
-      )}
+      ) : null}
     </YStack>
   );
 };

@@ -60,7 +60,7 @@ function RootLayoutNav() {
           publishableKey="pk_live_51OxCqWCofT1MBGPJA74YSwcKZmVsWT9ox0wz8ABNwTSbj1dz1fQ6cxrR7mombhjr8bVELDfl9Zs9jeLUxZWqn58X00BLhdjiAl"
         >
         <Stack>
-          <Stack.Screen name="register"  />
+          <Stack.Screen name="register" />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(movie)/[id]" options={{ presentation: 'modal'}} />
           <Stack.Screen name="(profile)" options={{ headerTitle: "Profile" }} />
