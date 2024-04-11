@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Cookie from 'js-cookie';
 import {
   Card,
   CardContent,
@@ -24,13 +25,19 @@ export default function LoginForm() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     const auth = getAuth();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       const userDoc = await getDoc(doc(db, "users", user.uid));
+      const token = await user.getIdToken();
+      console.log(token);
+
+      Cookie.set("token", token);
+      
+
       if (userDoc.exists() && userDoc.data().role === "admin") {
         toast({
           title: "Sucesso!",

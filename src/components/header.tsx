@@ -1,7 +1,7 @@
-'use client'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import Link from "next/link"
-import { useRouter, usePathname } from 'next/navigation'
+"use client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import {
   File,
   Home,
@@ -16,7 +16,7 @@ import {
   Settings,
   ShoppingCart,
   Users2,
-} from "lucide-react"
+} from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -24,8 +24,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -34,22 +34,30 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Cookie from "js-cookie";
 
 export default function Header() {
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const pathnames = pathname.split('/').filter(x => x)
+  const handleLogout = () => {
+    Cookie.remove("token");
+    router.push("/login");
+  };
+
+  const pathnames = pathname.split("/").filter((x) => x);
 
   return (
     <header className="flex h-12 items-center gap-4 border-0 bg-muted/40 px-6 sm:static sm:h-auto sm:bg-muted/40 sm:gap-4 sm:pt-3">
       <Breadcrumb className="hidden md:flex">
         <BreadcrumbList>
           {pathnames.map((value, index) => {
-            const breadcrumbLink = `/${pathnames.slice(0, index + 1).join('/')}`
+            const breadcrumbLink = `/${pathnames
+              .slice(0, index + 1)
+              .join("/")}`;
 
             return (
               <BreadcrumbItem key={breadcrumbLink}>
@@ -58,7 +66,7 @@ export default function Header() {
                 </BreadcrumbLink>
                 {index < pathnames.length - 1 && <BreadcrumbSeparator />}
               </BreadcrumbItem>
-            )
+            );
           })}
         </BreadcrumbList>
       </Breadcrumb>
@@ -77,10 +85,10 @@ export default function Header() {
             size="icon"
             className="overflow-hidden rounded-full"
           >
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -89,9 +97,9 @@ export default function Header() {
           <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
-  )
+  );
 }
