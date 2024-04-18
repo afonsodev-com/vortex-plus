@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import { Switch } from "@/components/ui/switch"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -38,6 +39,7 @@ export function SeriesModal() {
   const [trailerUrl, setTrailerUrl] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [episodes, setEpisodes] = useState([]);
+  const [isFeatured, setIsFeatured] = useState(false);
 
   const { toast } = useToast()
 
@@ -80,7 +82,8 @@ export function SeriesModal() {
         category: selectedCategory,
         trailerUrl,
         videoUrl,
-        episodes
+        episodes,
+        isFeatured
       });
       toast({
         title: "Sucesso!",
@@ -142,6 +145,9 @@ export function SeriesModal() {
             Preencha os campos abaixo para cadastrar uma nova série.
           </DialogDescription>
         </DialogHeader>
+
+        <Label htmlFor="isFeatured">Destaque</Label>
+        <Switch checked={isFeatured} onCheckedChange={setIsFeatured} />
         <div className="grid gap-4 py-4 grid-cols-1 md:grid-cols-8">
           <div className="space-y-2 md:col-span-3">
             <Label htmlFor="title">Título</Label>
@@ -169,21 +175,6 @@ export function SeriesModal() {
           </div>
           <div className="space-y-2 md:col-span-3">
             <Label htmlFor="categories">Categorias</Label>
-            {/* <Select onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={selectedCategory || "Selecione a categoria"} />
-              </SelectTrigger>
-              <SelectContent>
-                {categoryOptions.map((category) => (
-                  <SelectItem 
-                    key={category.id} 
-                    value={category.id}
-                  >
-                    {category.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select> */}
             <FancyMultiSelect
               options={categoryOptions}
               onValueChange={handleValueChange}

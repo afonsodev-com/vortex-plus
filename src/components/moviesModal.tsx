@@ -26,6 +26,7 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { useToast } from "@/components/ui/use-toast"
 import { CheckCircle, PlusCircle } from 'lucide-react';
 import { FancyMultiSelect } from './multiSelect';
+import { Switch } from './ui/switch';
 
 export function MoviesModal() {
   const [title, setTitle] = useState("");
@@ -37,6 +38,7 @@ export function MoviesModal() {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
+  const [isFeatured, setIsFeatured] = useState(false);
 
   const { toast } = useToast()
 
@@ -77,7 +79,8 @@ export function MoviesModal() {
         description,
         category: selectedCategory,
         trailerUrl,
-        videoUrl
+        videoUrl,
+        isFeatured
       });
       toast({
         title: "Sucesso!",
@@ -139,6 +142,8 @@ export function MoviesModal() {
             Preencha os campos abaixo para cadastrar um novo filme.
           </DialogDescription>
         </DialogHeader>
+        <Label htmlFor="isFeatured">Destaque</Label>
+        <Switch checked={isFeatured} onCheckedChange={setIsFeatured} />
         <div className="grid gap-4 py-4 grid-cols-1 md:grid-cols-8">
           <div className="space-y-2 md:col-span-3">
             <Label htmlFor="title">Título</Label>

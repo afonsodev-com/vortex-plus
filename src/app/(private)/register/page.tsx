@@ -32,12 +32,12 @@ export default function Register() {
     const seriesCollection = collection(db, 'series');
     
     const unsubscribeMovies = onSnapshot(moviesCollection, (snapshot) => {
-      const moviesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Movie));
+      const moviesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), isFeatured: doc.data().isFeatured || false } as Movie));
       setMovies(moviesData);
     });
 
     const unsubscribeSeries = onSnapshot(seriesCollection, (snapshot) => {
-      const seriesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Series));
+      const seriesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), isFeatured: doc.data().isFeatured || false } as Series));
       setSeries(seriesData);
     });
 
