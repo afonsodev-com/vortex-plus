@@ -23,32 +23,6 @@ import { useEffect, useState } from 'react';
 import { db } from '@/lib/firebase';
 import { collection, getDocs, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 
-interface Movie {
-  id: string;
-  title?: string;
-  subtitle?: string;
-  year?: number;
-  rating?: number;
-  posterUrl?: string;
-  description?: string;
-  category?: string;
-  trailerUrl?: string;
-  videoUrl?: string;
-}
-
-interface Series {
-  id: string;
-  title?: string;
-  subtitle?: string;
-  year?: number;
-  rating?: number;
-  posterUrl?: string;
-  description?: string;
-  category?: string;
-  trailerUrl?: string;
-  videoUrl?: string;
-}
-
 export default function Register() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [series, setSeries] = useState<Series[]>([]);
@@ -114,7 +88,7 @@ export default function Register() {
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">
                     Showing <strong>1-10</strong> of <strong>32</strong>{" "}
-                    products
+                    movies
                   </div>
                 </CardFooter>
               </Card>
@@ -133,7 +107,7 @@ export default function Register() {
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">
                     Showing <strong>1-10</strong> of <strong>32</strong>{" "}
-                    products
+                    series
                   </div>
                 </CardFooter>
               </Card>

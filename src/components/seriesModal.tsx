@@ -25,6 +25,7 @@ import { db } from '../lib/firebase';
 import { collection, doc, setDoc } from "firebase/firestore";
 import { useToast } from "@/components/ui/use-toast"
 import { CheckCircle, PlusCircle } from 'lucide-react';
+import { FancyMultiSelect } from './multiSelect';
 
 export function SeriesModal() {
   const [title, setTitle] = useState("");
@@ -33,7 +34,7 @@ export function SeriesModal() {
   const [rating, setRating] = useState("");
   const [posterUrl, setPosterUrl] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [trailerUrl, setTrailerUrl] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [episodes, setEpisodes] = useState([]);
@@ -47,14 +48,19 @@ export function SeriesModal() {
     setRating("");
     setPosterUrl("");
     setDescription("");
-    setSelectedCategory("");
+    setSelectedCategory([]);
     setTrailerUrl("");
     setVideoUrl("");
     setEpisodes([]);
   };
+
+  const handleValueChange = (value: { id: string }[]) => {
+    const categoryIds = value.map(category => category.id);
+    setSelectedCategory(categoryIds);
+  };
   
   const saveToFirestore = async () => {
-    if (!selectedCategory || selectedCategory === "") {
+    if (!selectedCategory || selectedCategory.length === 0) {
       toast({
         title: "Erro!",
         description: "Por favor, selecione uma categoria.",
@@ -163,7 +169,7 @@ export function SeriesModal() {
           </div>
           <div className="space-y-2 md:col-span-3">
             <Label htmlFor="categories">Categorias</Label>
-            <Select onValueChange={setSelectedCategory}>
+            {/* <Select onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder={selectedCategory || "Selecione a categoria"} />
               </SelectTrigger>
@@ -177,7 +183,12 @@ export function SeriesModal() {
                   </SelectItem>
                 ))}
               </SelectContent>
-            </Select>
+            </Select> */}
+            <FancyMultiSelect
+              options={categoryOptions}
+              onValueChange={handleValueChange}
+              placeholder="Select a category"
+            />
           </div>
           <div className="space-y-2 md:col-span-3">
             <Label htmlFor="trailerUrl">URL do Trailer</Label>

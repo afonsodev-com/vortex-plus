@@ -49,11 +49,27 @@
     }
   }
 
+  
+
   @layer base {
     * {
       @apply border-border;
     }
     body {
       @apply bg-background text-foreground;
+    }
+    /* Isso afeta toda a barra de rolagem */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555; 
     }
   }

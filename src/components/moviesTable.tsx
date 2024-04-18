@@ -19,24 +19,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-interface Movie {
-  id: string;
-  title?: string;
-  subtitle?: string;
-  year?: number;
-  rating?: number;
-  posterUrl?: string;
-  description?: string;
-  category?: string;
-  trailerUrl?: string;
-  videoUrl?: string;
-}
-
-interface MoviesTableProps {
-  movies: Movie[];
-  onDelete: (id: string) => void;
-}
-
 export const MoviesTable: React.FC<MoviesTableProps> = ({ movies, onDelete }) => {
   return (
     <Table className="w-full">
@@ -71,7 +53,11 @@ export const MoviesTable: React.FC<MoviesTableProps> = ({ movies, onDelete }) =>
             <TableCell className="w-auto">{movie.year}</TableCell>
             <TableCell className="w-auto"><Badge variant="default">{movie.rating}</Badge></TableCell>
             <TableCell className="w-auto">{movie.description}</TableCell>
-            <TableCell className="w-auto"><Badge variant="default">{movie.category}</Badge></TableCell>
+            <TableCell className="w-auto">
+              {Array.isArray(movie.category) ? movie.category.map((cat, index) => (
+                <Badge key={index} variant="default" className="m-0.5">{cat}</Badge>
+              )) : null}
+            </TableCell>
             <TableCell>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

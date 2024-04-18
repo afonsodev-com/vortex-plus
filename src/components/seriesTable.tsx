@@ -19,24 +19,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-interface Series {
-  id: string;
-  title?: string;
-  subtitle?: string;
-  year?: number;
-  rating?: number;
-  posterUrl?: string;
-  description?: string;
-  category?: string;
-  trailerUrl?: string;
-  videoUrl?: string;
-}
-
-interface SeriesTableProps {
-  series: Series[];
-  onDelete: (id: string) => void;
-}
-
 export const SeriesTable: React.FC<SeriesTableProps> = ({ series, onDelete }) => {
   return (
     <Table className="w-full">
@@ -71,7 +53,11 @@ export const SeriesTable: React.FC<SeriesTableProps> = ({ series, onDelete }) =>
             <TableCell className="w-auto">{serie.year}</TableCell>
             <TableCell className="w-auto"><Badge variant="default">{serie.rating}</Badge></TableCell>
             <TableCell className="w-auto">{serie.description}</TableCell>
-            <TableCell className="w-auto"><Badge variant="default">{serie.category}</Badge></TableCell>
+            <TableCell className="w-auto">
+              {Array.isArray(serie.category) ? serie.category.map((cat, index) => (
+                <Badge key={index} variant="default" className="m-0.5">{cat}</Badge>
+              )) : null}
+            </TableCell>
             <TableCell>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
