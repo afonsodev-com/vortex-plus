@@ -18,64 +18,87 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { EpisodesModal } from "./episodesModal"
+import { useState } from "react"
 
 export const SeriesTable: React.FC<SeriesTableProps> = ({ series, onDelete }) => {
+  const [episodes, setEpisodes] = useState<Episode[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSeries, setSelectedSeries] = useState<Series | null>(null);
+
   return (
-    <Table className="w-full">
-      <TableHeader>
-        <TableRow>
-          <TableHead className="hidden w-auto sm:table-cell">Poster</TableHead>
-          <TableHead>Title</TableHead>
-          <TableHead>Subtitle</TableHead>
-          <TableHead>Year</TableHead>
-          <TableHead>Rating</TableHead>
-          <TableHead>Description</TableHead>
-          <TableHead>Categories</TableHead>
-          <TableHead>
-            <span className="sr-only">Actions</span>
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {series.map((serie, index) => (
-          <TableRow key={serie.id}>
-            <TableCell className="hidden w-auto sm:table-cell">
-              <Image
-                alt="Serie poster"
-                className="aspect-square rounded-md object-cover"
-                height="54"
-                width="54"
-                src={serie.posterUrl || '/placeholder.png'}
-              />
-            </TableCell>
-            <TableCell className="font-medium w-auto">{serie.title}</TableCell>
-            <TableCell className="w-auto">{serie.subtitle}</TableCell>
-            <TableCell className="w-auto">{serie.year}</TableCell>
-            <TableCell className="w-auto"><Badge variant="default">{serie.rating}</Badge></TableCell>
-            <TableCell className="w-auto">{serie.description}</TableCell>
-            <TableCell className="w-auto">
-              {Array.isArray(serie.category) ? serie.category.map((cat, index) => (
-                <Badge key={index} variant="default" className="m-0.5">{cat}</Badge>
-              )) : null}
-            </TableCell>
-            <TableCell>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button aria-haspopup="true" size="icon" variant="ghost">
-                    <MoreHorizontal className="h-4 w-4" />
-                    <span className="sr-only">Toggle menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => onDelete(serie.id)}>Delete</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </TableCell>
+    <>    
+      <Table className="w-full">
+        <TableHeader>
+          <TableRow>
+            <TableHead className="hidden w-auto sm:table-cell">Poster</TableHead>
+            <TableHead>Title</TableHead>
+            <TableHead>Subtitle</TableHead>
+            <TableHead>Year</TableHead>
+            <TableHead>Rating</TableHead>
+            <TableHead>Description</TableHead>
+            <TableHead>Categories</TableHead>
+            <TableHead>
+              <span className="sr-only">Actions</span>
+            </TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {series.map((serie, index) => (
+            <TableRow key={serie.id}>
+              <TableCell className="hidden w-auto sm:table-cell">
+                <Image
+                  alt="Serie poster"
+                  className="aspect-square rounded-md object-cover"
+                  height="54"
+                  width="54"
+                  src={serie.posterUrl || '/placeholder.png'}
+                />
+              </TableCell>
+              <TableCell className="font-medium w-auto">{serie.title}</TableCell>
+              <TableCell className="w-auto">{serie.subtitle}</TableCell>
+              <TableCell className="w-auto">{serie.year}</TableCell>
+              <TableCell className="w-auto"><Badge variant="default">{serie.rating}</Badge></TableCell>
+              <TableCell className="w-auto">{serie.description}</TableCell>
+              <TableCell className="w-auto">
+                {Array.isArray(serie.category) ? serie.category.map((cat, index) => (
+                  <Badge key={index} variant="default" className="m-0.5">{cat}</Badge>
+                )) : null}
+              </TableCell>
+              <TableCell>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button aria-haspopup="true" size="icon" variant="ghost">
+                      <MoreHorizontal className="h-4 w-4" />
+                      <span className="sr-only">Toggle menu</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => {
+                      console.log(`Adicionando episódios para a série: ${serie.title}`);
+                      setSelectedSeries(serie);
+                      setIsModalOpen(true);
+                    }}>
+                      Episodes
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => onDelete(serie.id)}>Delete</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      {isModalOpen && 
+        <EpisodesModal 
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+          episodes={episodes}
+          setEpisodes={setEpisodes}
+          selectedSeries={selectedSeries}
+        />
+      }
+    </>
   );
 };

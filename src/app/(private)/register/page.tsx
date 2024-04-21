@@ -1,6 +1,5 @@
 'use client'
 import Image from "next/image"
-import { unstable_noStore, revalidateTag } from "next/cache"
 import { MoviesModal } from "@/components/moviesModal"
 import { SeriesModal } from "@/components/seriesModal"
 import { MoviesTable } from "@/components/moviesTable"
@@ -37,7 +36,8 @@ export default function Register() {
     });
 
     const unsubscribeSeries = onSnapshot(seriesCollection, (snapshot) => {
-      const seriesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), isFeatured: doc.data().isFeatured || false } as Series));
+      const seriesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), isFeatured: doc.data().isFeatured || false, episodes: doc.data().episodes || [] // Adicione esta linha
+      } as Series));
       setSeries(seriesData);
     });
 

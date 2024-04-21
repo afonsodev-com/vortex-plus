@@ -9,7 +9,7 @@ interface Movie {
   rating?: number;
   posterUrl?: string;
   description?: string;
-  category?: string[]; // Altere o tipo de category para string[]
+  category?: string[];
   trailerUrl?: string;
   videoUrl?: string;
 }
@@ -29,12 +29,32 @@ interface Series {
   rating?: number;
   posterUrl?: string;
   description?: string;
-  category?: string[]; // Altere o tipo de category para string[]
+  category?: string[];
   trailerUrl?: string;
   videoUrl?: string;
+  episodes: Episode[];
 }
 
 interface SeriesTableProps {
   series: Series[];
   onDelete: (id: string) => void;
+}
+
+
+interface Episode {
+  id: number;
+  season: number;
+  title: string;
+  duration: string;
+  poster: string;
+  description: string;
+  videoUrl: string;
+}
+
+interface EpisodesModalProps {
+  episodes: Episode[];
+  setEpisodes: React.Dispatch<React.SetStateAction<Episode[]>>;
+  selectedSeries: any;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
