@@ -17,6 +17,7 @@ interface Movie {
 interface MoviesTableProps {
   movies: Movie[];
   onDelete: (id: string) => void;
+  onEdit: (movie: Movie) => void; // Adicione esta linha
 }
 
 

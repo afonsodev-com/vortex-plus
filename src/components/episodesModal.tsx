@@ -46,7 +46,15 @@ export function EpisodesModal({ episodes, setEpisodes, isOpen, setIsOpen, select
   
       if (seriesSnap.exists()) {
         const seriesData = seriesSnap.data();
-        seriesData.episodes = seriesData.episodes ? [...seriesData.episodes, ...episodes] : [...episodes];
+        let lastId = 0;
+        if (seriesData.episodes && seriesData.episodes.length > 0) {
+          lastId = seriesData.episodes.reduce((maxId: number, episode: { id: number; }) => Math.max(maxId, episode.id), 0);
+        }
+  
+        // Gera um novo ID para cada episódio
+        const newEpisodes = episodes.map((episode, index) => ({ ...episode, id: lastId + index + 1 }));
+  
+        seriesData.episodes = seriesData.episodes ? [...seriesData.episodes, ...newEpisodes] : [...newEpisodes];
   
         await updateDoc(seriesRef, seriesData);
       } else {

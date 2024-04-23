@@ -19,7 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-export const MoviesTable: React.FC<MoviesTableProps> = ({ movies, onDelete }) => {
+export const MoviesTable: React.FC<MoviesTableProps> = ({ movies, onDelete, onEdit }) => {
   return (
     <Table className="w-full">
       <TableHeader>
@@ -68,7 +68,7 @@ export const MoviesTable: React.FC<MoviesTableProps> = ({ movies, onDelete }) =>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => onEdit(movie)}>Edit</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => onDelete(movie.id)}>Delete</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

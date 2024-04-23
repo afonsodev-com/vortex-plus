@@ -160,7 +160,7 @@ export function SeriesModal() {
           </div>
           <div className="space-y-2 md:col-span-8">
             <Label htmlFor="poster">Poster</Label>
-            <Input id="poster" value={posterUrl} onChange={(e) => setPosterUrl(e.target.value)} />
+            <Input id="poster" value={posterUrl} type="url" onChange={(e) => setPosterUrl(e.target.value)} />
           </div>
           <div className="space-y-2 md:col-span-8">
             <Label htmlFor="description">Descrição</Label>
@@ -176,11 +176,11 @@ export function SeriesModal() {
           </div>
           <div className="space-y-2 md:col-span-3">
             <Label htmlFor="trailerUrl">URL do Trailer</Label>
-            <Input id="trailerUrl" value={trailerUrl} onChange={(e) => setTrailerUrl(e.target.value)} />
+            <Input id="trailerUrl" value={trailerUrl} type="url" onChange={(e) => setTrailerUrl(e.target.value)} />
           </div>
           <div className="space-y-2 md:col-span-2">
             <Label htmlFor="videoUrl">URL do Vídeo</Label>
-            <Input id="videoUrl" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} />
+            <Input id="videoUrl" value={videoUrl} type="url" onChange={(e) => setVideoUrl(e.target.value)} />
           </div>
         </div>
         <DialogFooter>

@@ -25,6 +25,8 @@ import { collection, getDocs, onSnapshot, doc, deleteDoc } from 'firebase/firest
 export default function Register() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [series, setSeries] = useState<Series[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+
 
   useEffect(() => {
     const moviesCollection = collection(db, 'movies');
@@ -57,6 +59,10 @@ export default function Register() {
     await deleteDoc(seriesRef);
   }
 
+  const editMovie = (movie: Movie) => {
+    setSelectedMovie(movie);
+  }
+
   return (
     <div className="flex h-full w-full flex-col bg-muted/40">
       <div className="flex flex-col sm:gap-4 sm:py-4">
@@ -68,7 +74,7 @@ export default function Register() {
                 <TabsTrigger value="series">Series</TabsTrigger>
               </TabsList>
               <TabsContent className="mt-0" value="movies">
-                <MoviesModal />
+                <MoviesModal movie={selectedMovie} />
               </TabsContent>
               <TabsContent className="mt-0" value="series">
                 <SeriesModal />
@@ -83,7 +89,7 @@ export default function Register() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="overflow-x-auto">
-                  <MoviesTable movies={movies} onDelete={deleteMovie} />
+                  <MoviesTable movies={movies} onDelete={deleteMovie} onEdit={editMovie} />
                 </CardContent>
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">
